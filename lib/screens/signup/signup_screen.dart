@@ -1,3 +1,5 @@
+import 'package:Discere/components/appbar_back.dart';
+import 'package:Discere/components/continue_button.dart';
 import 'package:flutter/material.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -43,8 +45,69 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBarBack(),
+      body: Stack(
+        children: <Widget> [
+
+        ],
+      ),
+    );
+  }
+
+  Widget widgetContinueButton(){
+    return ContinueButton(onPressed: 
+       _active ? (){ 
+              void nextPage(){
+                FocusScope.of(context).unfocus();
+                _pageController.nextPage(
+                  duration: Duration(milliseconds: 500), 
+                  curve: Curves.linear
+                );
+                setState(() {
+                  _currentPage = _pageController.page + 1;
+                });
+              }
+              //["email", "password","name","birthday", "genre", "pics"];
+              switch (currentScreen) {
+                case "email":            
+                  if(this._formKeyEmail.currentState.validate()){
+                    _formKeyEmail.currentState.dispose();
+                    nextPage();    
+                  }
+                  break;
+                case "password":   
+                  if(this._formKeyPass.currentState.validate()){
+                    _formKeyPass.currentState.dispose();
+                    nextPage();    
+                  }               
+                  break;
+                case "name": 
+                  if(this._formKeyName.currentState.validate()){
+                    _formKeyName.currentState.dispose();
+                    nextPage();    
+                  }                   
+                  break;
+                case "birthday":   
+                  if(this._formKeyBirthday.currentState.validate()){
+                    _formKeyBirthday.currentState.dispose();
+                    nextPage();    
+                  }                
+                  break;
+                case "genre": 
+                  nextPage();                 
+                  break;
+                case "pics":   
+                  Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (BuildContext context) => Container()),
+                     ModalRoute.withName('/home'),
+                  );  
+                  break;
+                default:
+                  return;
+              }
+            } : null
     );
   }
 }
