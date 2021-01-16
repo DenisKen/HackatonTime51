@@ -4,6 +4,7 @@ import 'package:Discere/utils/enum_authStatus.dart';
 import 'package:Discere/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'models/user_notifier.dart';
 
@@ -21,6 +22,9 @@ class _ManagerRouteState extends State<ManagerRoute> {
   }
 
   Future<void> _checkLocalAuth() async {
+
+    final sharedPrefs = await SharedPreferences.getInstance();
+
     await Provider.of<UserNotifier>(context, listen: false).auth();
   }
 

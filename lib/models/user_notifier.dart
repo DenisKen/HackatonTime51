@@ -10,7 +10,6 @@ class UserNotifier extends ChangeNotifier {
 
   Future<AuthStatus> auth() async {
     _updateAuthStatus(AuthStatus.authenticating);
-
     //Try to authenticate with our server
 
     //
@@ -21,7 +20,7 @@ class UserNotifier extends ChangeNotifier {
 
   Future<void> _initUser(json, token) async {
     User.fromJson(json);
-
+  print("asdasd");
     //Save Session Locally //////////////////////
     SharedPreferences sharedPrefs = await _prefs;
     sharedPrefs.setString("token", token);

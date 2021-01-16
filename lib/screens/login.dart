@@ -66,7 +66,7 @@ class _LoginState extends State<Login> {
               });
       },
       controller: _controller,
-      width: 274,
+      width: SizeConfig.safeBlockHorizontal * 100,
       hintText: "E-mail",
       validator: (String value) {
         if (!Validator.email(value)) {
