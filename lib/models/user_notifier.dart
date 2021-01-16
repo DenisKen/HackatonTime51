@@ -31,6 +31,7 @@ class UserNotifier extends ChangeNotifier {
 
   void _updateAuthStatus(AuthStatus newValue) {
     authStatus = newValue;
+    print(authStatus);
     notifyListeners();
   }
 }
