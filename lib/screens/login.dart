@@ -1,24 +1,20 @@
 import 'package:Discere/components/input_fields.dart';
+import 'package:Discere/screens/signup/signup_screen.dart';
 import 'package:Discere/theme/style.dart';
 import 'package:Discere/utils/size_config.dart';
 import 'package:Discere/utils/validator.dart';
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
-  final GlobalKey<FormState> formKey;
-  final ValueChanged<bool> activeButton;
-  final String currentScreenStep;
-
-  const Login(
-      {Key key, this.formKey, this.activeButton, this.currentScreenStep})
-      : super(key: key);
-
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  final _controller = TextEditingController();
+  final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  final _emailController = TextEditingController();
+
+  bool buttonEnable = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,26 +50,29 @@ class _LoginState extends State<Login> {
   }
 
   Widget _inputField() {
-    return InputFormField(
-      //Active Button when Inputfield Isnt Empty
-      onChanged: (value) {
-        value.isEmpty
-            ? setState(() {
-                widget.activeButton(false);
-              })
-            : setState(() {
-                widget.activeButton(true);
-              });
-      },
-      controller: _controller,
-      width: SizeConfig.safeBlockHorizontal * 100,
-      hintText: "E-mail",
-      validator: (String value) {
-        if (!Validator.email(value)) {
-          return "";
-        }
-        return null;
-      },
+    return Form(
+      key: formKey,
+      child: InputFormField(
+        //Active Button when Inputfield Isnt Empty
+        onChanged: (value) {
+          value.isEmpty
+              ? setState(() {
+                  buttonEnable = false;
+                })
+              : setState(() {
+                  buttonEnable = true;
+                });
+        },
+        controller: _emailController,
+        width: SizeConfig.safeBlockHorizontal * 100,
+        hintText: "E-mail",
+        validator: (String value) {
+          if (!Validator.email(value)) {
+            return "";
+          }
+          return null;
+        },
+      ),
     );
   }
 
@@ -82,7 +81,19 @@ class _LoginState extends State<Login> {
       height: 50,
       width: SizeConfig.safeBlockHorizontal * 100,
       child: RaisedButton(
-        onPressed: () async {},
+        onPressed: buttonEnable
+            ? () async {
+                if (this.formKey.currentState.validate()) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SignUpScreen(
+                                emailFilled: _emailController.text,
+                              )));
+                  formKey.currentState.dispose();
+                }
+              }
+            : null,
         color: Colors.blue,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50),
@@ -102,7 +113,7 @@ class _LoginState extends State<Login> {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50),
             side: BorderSide(color: Colors.green)),
-        child: Text('LOG IN'),
+        child: Text('Facebook'),
       ),
     );
   }
@@ -117,7 +128,7 @@ class _LoginState extends State<Login> {
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(50),
             side: BorderSide(color: Colors.green)),
-        child: Text('LOG IN'),
+        child: Text('Google'),
       ),
     );
   }

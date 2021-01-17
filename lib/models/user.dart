@@ -7,6 +7,8 @@ class User {
   String name;
   String picURL;
 
+  String role;
+
   factory User({id, token, name}) {
     _instance.id = id;
     _instance.token = token;

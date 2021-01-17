@@ -1,10 +1,10 @@
+import 'package:Discere/screens/home.dart';
 import 'package:Discere/screens/loading.dart';
 import 'package:Discere/screens/login.dart';
 import 'package:Discere/utils/enum_authStatus.dart';
 import 'package:Discere/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'models/user_notifier.dart';
 
@@ -14,18 +14,15 @@ class ManagerRoute extends StatefulWidget {
 }
 
 class _ManagerRouteState extends State<ManagerRoute> {
+  bool init = false;
+
   @override
   void didChangeDependencies() {
-    _checkLocalAuth();
+    if (init) return;
+    WidgetsBinding.instance.addPostFrameCallback((_) => _checkLocalAuth());
 
+    init = true;
     super.didChangeDependencies();
-  }
-
-  Future<void> _checkLocalAuth() async {
-
-    final sharedPrefs = await SharedPreferences.getInstance();
-
-    await Provider.of<UserNotifier>(context, listen: false).auth();
   }
 
   @override
@@ -34,14 +31,18 @@ class _ManagerRouteState extends State<ManagerRoute> {
     return Consumer<UserNotifier>(builder: (context, notifier, _) {
       switch (notifier.authStatus) {
         case AuthStatus.authenticated:
-          return Login();
-          break;
+          return Home();
         case AuthStatus.unauthenticated:
-          return Login();
-          break;
+          return Home();
         default:
           return LoadingScreen();
       }
     });
+  }
+
+  Future<void> _checkLocalAuth() async {
+    print("Checking Local Auth >>>>>>>>>>>>>>>>>>>>>> MANAGER_ROUTE");
+
+    await Provider.of<UserNotifier>(context, listen: false).auth("","");
   }
 }

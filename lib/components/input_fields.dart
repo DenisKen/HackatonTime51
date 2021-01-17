@@ -5,6 +5,7 @@ class InputFormField extends StatefulWidget {
 
   final double width;
 
+  final String initialValue;
   final String hintText;
   final int maxLength;
 
@@ -18,7 +19,7 @@ class InputFormField extends StatefulWidget {
 
   final Function(String) onChanged;
 
-  const InputFormField({Key key, this.width, this.controller, this.hintText, this.validator, this.errorValidator, this.formKey, this.textInputType, this.maxLength, this.onChanged}) : super(key: key);
+  const InputFormField({Key key, this.width, this.controller, this.hintText, this.validator, this.errorValidator, this.formKey, this.textInputType, this.maxLength, this.onChanged, this.initialValue}) : super(key: key);
 
   @override
   _InputFormFieldState createState() => _InputFormFieldState();
@@ -59,7 +60,7 @@ class _InputFormFieldState extends State<InputFormField> {
         textAlign: TextAlign.center,
         keyboardType: this.widget.textInputType,
         controller: this.widget.controller,
-        validator: this.widget.validator,     
+        validator: this.widget.validator,   
         style: ThemeText.sign_up_input_field,
         decoration: InputDecoration(
           counter: SizedBox.shrink(),

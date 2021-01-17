@@ -6,31 +6,27 @@ import 'package:shared_preferences/shared_preferences.dart';
 class UserNotifier extends ChangeNotifier {
   AuthStatus authStatus = AuthStatus.none;
 
-  final _prefs = SharedPreferences.getInstance();
-
-  Future<AuthStatus> auth() async {
+  Future<AuthStatus> auth(email, pass) async {
     _updateAuthStatus(AuthStatus.authenticating);
     //Try to authenticate with our server
-
+    if (email != "teste" && pass != "teste"){
+        authStatus = AuthStatus.unauthenticated;
+        return authStatus;
+    }
     //
-    await _initUser(null, null);
+    await _initUser(null, 'token1231');
 
     return authStatus;
   }
 
   Future<void> _initUser(json, token) async {
-    User.fromJson(json);
-  print("asdasd");
-    //Save Session Locally //////////////////////
-    SharedPreferences sharedPrefs = await _prefs;
-    sharedPrefs.setString("token", token);
-
+    //User.fromJson(json);
     _updateAuthStatus(AuthStatus.authenticated);
   }
 
   void _updateAuthStatus(AuthStatus newValue) {
     authStatus = newValue;
-    print(authStatus);
+    print("updateAuthStatus " + authStatus.toString());
     notifyListeners();
   }
 }
