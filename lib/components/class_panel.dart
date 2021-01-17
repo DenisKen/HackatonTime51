@@ -1,4 +1,5 @@
 import 'package:Discere/screens/class_detail.dart';
+import 'package:Discere/theme/style.dart';
 import 'package:flutter/material.dart';
 
 class ClassPanel extends StatelessWidget {
@@ -28,8 +29,13 @@ class ClassPanel extends StatelessWidget {
       child: Container(
         padding: EdgeInsets.symmetric(horizontal: 10, vertical: 10),
         height: 200,
-        color: Colors.amber[600],
-        child: Column(children: [
+        decoration: BoxDecoration(
+                              color: ThemeColor.black_grey,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(13))),
+        
+        child: Column(
+          children: [
           live != null
               ? live
                   ? Align(
@@ -38,20 +44,34 @@ class ClassPanel extends StatelessWidget {
                           width: 60,
                           height: 20,
                           decoration: BoxDecoration(
-                              color: Colors.grey,
+                              color: ThemeColor.light_green,
                               borderRadius:
                                   BorderRadius.all(Radius.circular(10))),
                           child: FittedBox(
-                              fit: BoxFit.contain, child: Text('live'))),
+                              fit: BoxFit.contain, child: Text('live', style: ThemeText.font_bold_6_white,))),
                     )
                   : Container()
               : Container(),
-          Expanded(child: Center(child: Text('$title'))),
+          Expanded(
+              child: Center(
+                  child: Text(
+            '$title',
+            style: ThemeText.font_bold_24_secondary_color,
+          ))),
           Align(
             alignment: Alignment.bottomCenter,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [Text('$date'), Text('$hour')],
+              children: [
+                Text(
+                  '$date',
+                  style: ThemeText.font_bold_12_secondary_color,
+                ),
+                Text(
+                  '$hour',
+                  style: ThemeText.font_bold_12_secondary_color,
+                )
+              ],
             ),
           )
         ]),

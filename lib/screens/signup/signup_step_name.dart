@@ -39,15 +39,17 @@ class _SignUpStepNameState extends State<SignUpStepName> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: EdgeInsets.symmetric(horizontal: 22, vertical: 21),
       child: Form(
         key: widget.formKey,
         child: Column(children: <Widget>[
           Padding(padding: EdgeInsets.only(top: 40)),
-          Text("Qual seu nome completo?", style: ThemeText.sign_up_title),
+          Text("Seu nome completo", style: ThemeText.sign_up_option),
           Padding(padding: EdgeInsets.only(bottom: 13)),
           InputFormField(
-            width: SizeConfig.safeBlockHorizontal*100,
-            hintText: "Nome completo",
+            width: SizeConfig.safeBlockHorizontal * 100,
+            iconData: Icons.person_outline,
+            borderColor: ThemeColor.secondary_color,
             controller: _nameController,
             onChanged: (value) {
               _validator();
@@ -60,12 +62,13 @@ class _SignUpStepNameState extends State<SignUpStepName> {
               return null;
             },
           ),
-          Padding(padding: EdgeInsets.only(bottom: 13)),
-          Text("Qual seu nome social?", style: ThemeText.sign_up_title),
+          Padding(padding: EdgeInsets.only(bottom: 30)),
+          Text("Nome social", style: ThemeText.sign_up_option),
           Padding(padding: EdgeInsets.only(bottom: 13)),
           InputFormField(
-              width: 274,
-              hintText: "Nome social",
+              width: SizeConfig.safeBlockHorizontal * 100,
+              iconData: Icons.person_outline,
+              borderColor: ThemeColor.secondary_color,
               controller: _nicknameController,
               onChanged: (value) {
                 _validator();

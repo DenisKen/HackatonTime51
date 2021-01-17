@@ -43,68 +43,56 @@ class _SignUpStepBirthState extends State<SignUpStepBirth> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Padding(padding: EdgeInsets.only(top: 40)),
-            Text("Qual sua data de nascimento?",
-                style: ThemeText.sign_up_title),
-            Padding(padding: EdgeInsets.only(bottom: 13)),
+            Text("Data de nascimento", style: ThemeText.sign_up_option),
+            Padding(padding: EdgeInsets.only(bottom: 30)),
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                InputFormField(
-                  onChanged: (value) {
-                    _validate();
-                  },
-                  controller: _dayController,
-                  width: 60,
-                  maxLength: 2,
-                  hintText: "Dia",
-                  textInputType: TextInputType.number,
-                  validator: (String value) {
-                    if (value.isEmpty) {
-                      print("day empty");
-                      return "";
-                    }
-                    return null;
-                  },
-                ),
-                Padding(padding: EdgeInsets.symmetric(horizontal: 13.5)),
-                InputFormField(
-                  onChanged: (value) {
-                    _validate();
-                  },
-                  controller: _monthController,
-                  width: 60,
-                  maxLength: 2,
-                  hintText: "Mês",
-                  textInputType: TextInputType.number,
-                  validator: (String value) {
-                    if (value.isEmpty) {
-                      print("month empty");
-                      return "";
-                    }
-                    return null;
-                  },
-                ),
-                Padding(padding: EdgeInsets.symmetric(horizontal: 13.5)),
-                InputFormField(
-                  onChanged: (value) {
-                    _validate();
-                  },
-                  controller: _yearController,
-                  width: 83,
-                  maxLength: 4,
-                  hintText: "Ano",
-                  textInputType: TextInputType.number,
-                  validator: (String value) {
-                    if (value.isEmpty) {
-                      print("year empty");
-                      return "";
-                    }
-                    return null;
-                  },
-                ),
+                _field(
+                    tip: "Dia",
+                    width: 60.0,
+                    maxLength: 2,
+                    controller: _dayController),
+                _field(
+                    tip: "Mês",
+                    width: 60.0,
+                    maxLength: 2,
+                    controller: _monthController),
+                _field(
+                    tip: "Ano",
+                    width: 83.0,
+                    maxLength: 4,
+                    controller: _yearController),
               ],
             )
           ]),
+    );
+  }
+
+  Widget _field({tip, width, maxLength, controller}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("$tip", style: ThemeText.input_field_tip),
+        Padding(padding: EdgeInsets.only(bottom: 13)),
+        InputFormField(
+          onChanged: (value) {
+            _validate();
+          },
+          borderColor: ThemeColor.secondary_color,
+          controller: controller,
+          width: width,
+          maxLength: maxLength,
+          textInputType: TextInputType.number,
+          validator: (String value) {
+            if (value.isEmpty) {
+              print("value empty");
+              return "";
+            }
+            return null;
+          },
+        ),
+      ],
     );
   }
 }

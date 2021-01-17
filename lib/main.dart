@@ -23,7 +23,8 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'Discere',
         theme: ThemeData(
-          primarySwatch: Colors.blue,
+          textSelectionTheme: TextSelectionThemeData(cursorColor: Colors.white) ,
+          primarySwatch: Colors.purple,
         ),
         home: ManagerRoute(),
       ),

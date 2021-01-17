@@ -1,4 +1,5 @@
 import 'package:Discere/components/input_fields.dart';
+import 'package:Discere/theme/style.dart';
 import 'package:Discere/utils/size_config.dart';
 import 'package:Discere/utils/validator.dart';
 import 'package:flutter/material.dart';
@@ -27,13 +28,12 @@ class _SignUpStepEmailState extends State<SignUpStepEmail> {
   final _passController = TextEditingController();
   final _confirmPassController = TextEditingController();
 
-
   @override
   void didChangeDependencies() {
     setState(() {
       _emailController = new TextEditingController(text: widget.emailFilled);
     });
-    
+
     super.didChangeDependencies();
   }
 
@@ -44,22 +44,28 @@ class _SignUpStepEmailState extends State<SignUpStepEmail> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(children: [
-      Padding(padding: EdgeInsets.only(top: 40)),
-      Text("Insira seu e-mail",
-          style: TextStyle(color: Colors.black, fontSize: 40)),
-      Padding(padding: EdgeInsets.only(top: 13)),
-      //INPUT FIELD
-      Form(
-          key: widget.formKey,
-          child: Column(
-            children: <Widget>[
-              _inputEmail(),
-              _inputPassword(),
-              _inputConfirmPassword()
-            ],
-          ))
-    ]);
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: 22, vertical: 21),
+      child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+        Padding(padding: EdgeInsets.only(top: 40)),
+        Form(
+            key: widget.formKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text("Email", style: ThemeText.input_field_tip),
+                Padding(padding: EdgeInsets.only(top: 18)),
+                _inputEmail(),
+                Text("Senha", style: ThemeText.input_field_tip),
+                Padding(padding: EdgeInsets.only(top: 18)),
+                _inputPassword(),
+                Text("Confirma senha", style: ThemeText.input_field_tip),
+                Padding(padding: EdgeInsets.only(top: 18)),
+                _inputConfirmPassword()
+              ],
+            ))
+      ]),
+    );
   }
 
   void _validator() {
@@ -85,8 +91,9 @@ class _SignUpStepEmailState extends State<SignUpStepEmail> {
         _validator();
       },
       controller: _emailController,
+      iconData: Icons.email_outlined,
+      borderColor: ThemeColor.primary_color,
       width: SizeConfig.safeBlockHorizontal * 100,
-      hintText: "E-mail",
       validator: (String value) {
         if (!Validator.email(value)) {
           return "";
@@ -102,7 +109,8 @@ class _SignUpStepEmailState extends State<SignUpStepEmail> {
         _validator();
       },
       width: SizeConfig.safeBlockVertical * 100,
-      hintText: "Senha",
+      iconData: Icons.lock_outline,
+      borderColor: ThemeColor.primary_color,
       controller: _passController,
       validator: (String value) {
         if (value.isEmpty) {
@@ -121,7 +129,8 @@ class _SignUpStepEmailState extends State<SignUpStepEmail> {
       },
       width: SizeConfig.safeBlockHorizontal * 100,
       controller: _confirmPassController,
-      hintText: "Confirme sua senha",
+      iconData: Icons.lock_outline,
+      borderColor: ThemeColor.primary_color,
       validator: (String value) {
         if (value.isEmpty || value != _passController.text) {
           print("confim pass false");

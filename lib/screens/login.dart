@@ -19,28 +19,22 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ThemeColor.background,
       body: SafeArea(
         child: Container(
-          decoration: BoxDecoration(gradient: ThemeColor.gradient_blue_violet),
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 22, vertical: 22),
             width: SizeConfig.safeBlockHorizontal * 100,
             child: Column(
               children: <Widget>[
-                Container(
-                  width: 50,
-                  height: 50,
-                  color: Colors.green,
+                CircleAvatar(
+                  radius: 56.5,
+                  backgroundColor: Colors.grey,
                 ),
-                Padding(padding: EdgeInsets.only(bottom: 50)),
+                Padding(padding: EdgeInsets.only(bottom: 60)),
                 _inputField(),
                 Padding(padding: EdgeInsets.only(bottom: 15)),
-                _buttonLogIn(),
-                Padding(padding: EdgeInsets.only(bottom: 15)),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget>[_buttonFacebook(), _buttonGoogle()],
-                )
+                _buttonLogIn()
               ],
             ),
           ),
@@ -65,7 +59,8 @@ class _LoginState extends State<Login> {
         },
         controller: _emailController,
         width: SizeConfig.safeBlockHorizontal * 100,
-        hintText: "E-mail",
+        iconData: Icons.email_outlined,
+        borderColor: ThemeColor.primary_color,
         validator: (String value) {
           if (!Validator.email(value)) {
             return "";
@@ -94,41 +89,11 @@ class _LoginState extends State<Login> {
                 }
               }
             : null,
-        color: Colors.blue,
+        color: ThemeColor.primary_color,
+        disabledColor: ThemeColor.button_disabled_primary,
         shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
-            side: BorderSide(color: Colors.green)),
-        child: Text('LOG IN'),
-      ),
-    );
-  }
-
-  Widget _buttonFacebook() {
-    return SizedBox(
-      height: 50,
-      width: SizeConfig.safeBlockHorizontal * 42.5,
-      child: RaisedButton(
-        onPressed: () async {},
-        color: Colors.blue,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
-            side: BorderSide(color: Colors.green)),
-        child: Text('Facebook'),
-      ),
-    );
-  }
-
-  Widget _buttonGoogle() {
-    return SizedBox(
-      height: 50,
-      width: SizeConfig.safeBlockHorizontal * 42.5,
-      child: RaisedButton(
-        onPressed: () async {},
-        color: Colors.blue,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(50),
-            side: BorderSide(color: Colors.green)),
-        child: Text('Google'),
+            borderRadius: BorderRadius.circular(3)),
+        child: Text('Login', style: ThemeText.font_bold_15_white,),
       ),
     );
   }

@@ -6,8 +6,7 @@ class PickerHour extends StatelessWidget {
   final controller;
   final ValueChanged<String> callBack;
 
-  const PickerHour({Key key, this.controller, this.callBack})
-      : super(key: key);
+  const PickerHour({Key key, this.controller, this.callBack}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +45,7 @@ class PickerHour extends StatelessWidget {
               borderSide: BorderSide.none,
             ),
             filled: true,
-            fillColor: Colors.white),
+            fillColor: ThemeColor.black_grey),
         validator: (value) {
           if (value.isEmpty) {
             return 'cant be empty';

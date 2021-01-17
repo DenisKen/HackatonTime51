@@ -8,6 +8,7 @@ import 'package:Discere/screens/signup/signup_step_email.dart';
 import 'package:Discere/screens/signup/signup_step_genre.dart';
 import 'package:Discere/screens/signup/signup_step_mentor.dart';
 import 'package:Discere/screens/signup/signup_step_name.dart';
+import 'package:Discere/theme/style.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,6 +25,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   PageController _pageController;
   final int _screenLength = 6;
   double _currentPage = 0;
+  Color color;
+  Color colorDisabled;
 
   SignUpData data = new SignUpData();
 
@@ -61,17 +64,23 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _pageController = new PageController(initialPage: 0);
     currentScreen = screensSteps[0];
 
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
     setState(() {
       _currentPage = 0;
     });
 
-    super.initState();
+    super.didChangeDependencies();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      resizeToAvoidBottomPadding: false,
+      backgroundColor: ThemeColor.background,
       appBar: AppBarBack(),
       body: Stack(
         children: <Widget>[widgetSignUpSteps(), widgetContinueButton()],
@@ -121,6 +130,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   Widget widgetContinueButton() {
     return ContinueButton(
+        color: color,
+        colorDisabled: colorDisabled,
         onPressed: _active
             ? () async {
                 void nextPage() {
@@ -140,22 +151,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     if (this._formKeyEmailPass.currentState.validate()) {
                       _formKeyEmailPass.currentState.dispose();
                       nextPage();
+                      setState(() {
+                        color = ThemeColor.secondary_color;
+                        colorDisabled = ThemeColor.button_disabled_secondary;
+                      });
                     }
                     break;
                   case "name":
                     if (this._formKeyName.currentState.validate()) {
                       _formKeyName.currentState.dispose();
                       nextPage();
+                      setState(() {
+                        color = ThemeColor.secondary_color;
+                        colorDisabled = ThemeColor.button_disabled_secondary;
+                      });
                     }
                     break;
                   case "birthday":
                     if (this._formKeyBirthday.currentState.validate()) {
                       _formKeyBirthday.currentState.dispose();
                       nextPage();
+                      setState(() {
+                        color = ThemeColor.secondary_color;
+                        colorDisabled = ThemeColor.button_disabled_secondary;
+                      });
                     }
                     break;
                   case "genre":
                     nextPage();
+                    setState(() {
+                        color = ThemeColor.primary_color;
+                        colorDisabled = ThemeColor.button_disabled_primary;
+                      });
                     break;
                   case "typeUser":
                     print(data.email);

@@ -1,4 +1,5 @@
 import 'package:Discere/components/class_panel.dart';
+import 'package:Discere/theme/style.dart';
 import 'package:Discere/utils/size_config.dart';
 import 'package:flutter/material.dart';
 
@@ -9,9 +10,12 @@ class Discover extends StatelessWidget {
       height: SizeConfig.safeBlockVertical * 100,
       width: SizeConfig.safeBlockHorizontal * 100,
       child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(
-          'Aulas disponivel',
-          style: TextStyle(color: Colors.white),
+        Container(
+          padding: EdgeInsets.symmetric(horizontal: 22, vertical: 21),
+                  child: Text(
+            'Aulas disponivel',
+            style: ThemeText.sign_up_option,
+          ),
         ),
         _classesAvaible()
       ]),

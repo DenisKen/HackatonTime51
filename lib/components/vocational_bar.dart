@@ -1,3 +1,4 @@
+import 'package:Discere/theme/style.dart';
 import 'package:Discere/utils/size_config.dart';
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -19,7 +20,8 @@ class VocationalBar extends StatelessWidget {
         child: Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('$title'),
+        Text('$title', style: ThemeText.font_medium_12_white,),
+        Padding(padding: EdgeInsets.only(bottom: 4)),
         LinearPercentIndicator(
           width: width,
           animation: true,

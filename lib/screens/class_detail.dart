@@ -1,4 +1,5 @@
 import 'package:Discere/components/appbar_back.dart';
+import 'package:Discere/theme/style.dart';
 import 'package:Discere/utils/size_config.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,7 @@ class ClassDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ThemeColor.background,
       appBar: AppBarBack(),
       body: Stack(children: [
         SingleChildScrollView(
@@ -27,7 +29,7 @@ class ClassDetail extends StatelessWidget {
                   Padding(padding: EdgeInsets.only(bottom: 20)),
                   _details(),
                   Padding(padding: EdgeInsets.only(bottom: 20)),
-                  _subscribes()
+                  //_subscribes()
                 ],
               ),
             )
@@ -41,16 +43,16 @@ class ClassDetail extends StatelessWidget {
   Widget _panelCover() {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-        color: Colors.grey,
+        color: ThemeColor.background,
         height: 200,
         child: Column(
           children: [
-            Expanded(child: Center(child: Text('$title'))),
+            Expanded(child: Center(child: Text('$title',style: ThemeText.font_bold_24_secondary_color,))),
             Align(
               alignment: Alignment.bottomCenter,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text('$date'), Text('$hour')],
+                children: [Text('$date',style: ThemeText.font_bold_15_secondary_color,), Text('$hour',style: ThemeText.font_bold_15_secondary_color,)],
               ),
             )
           ],
@@ -65,20 +67,26 @@ class ClassDetail extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 40,
+              backgroundColor: Colors.grey,
             ),
             Padding(
               padding: EdgeInsets.only(right: 10),
             ),
-            Text('Professor'),
+            Text('Nome',style: ThemeText.font_bold_15_white,),
           ],
         ),
         Container(
-          width: 40,
-          height: 40,
+          width: 78,
+          height: 72,
           decoration: BoxDecoration(
-              color: Colors.grey,
+              color: ThemeColor.secondary_color,
               borderRadius: BorderRadius.all(Radius.circular(10))),
-          child: Center(child: Text('20')),
+          child: Center(child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+            Text('20',style: ThemeText.font_bold_24_white,),
+            Text('Vagas',style: ThemeText.font_bold_15_white,),
+          ],) ),
         )
       ],
     );
@@ -88,9 +96,9 @@ class ClassDetail extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Detalhes'),
+        Text('Descrição',style: ThemeText.font_bold_24_white,),
         Padding(padding: EdgeInsets.only(bottom: 10)),
-        Text('Lorem asidja sdjioa jiojdoi ajdoiasj oiajdojao jaodj aodjaid')
+        Text('Lorem asidja sdjioa jiojdoi ajdoiasj oiajdojao jaodj aodjaid', style: ThemeText.font_normal_15_white,)
       ],
     );
   }
@@ -119,8 +127,8 @@ class ClassDetail extends StatelessWidget {
       child: Container(
         height: 50,
         width: SizeConfig.safeBlockHorizontal * 100,
-        color: Colors.grey,
-        child: Center(child: Text('Register')),
+        color: ThemeColor.primary_color,
+        child: Center(child: Text('Registrar', style: ThemeText.font_bold_15_white,)),
       ),
     );
   }

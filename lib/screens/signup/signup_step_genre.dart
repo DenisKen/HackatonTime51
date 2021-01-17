@@ -32,90 +32,91 @@ class _SignUpStepGenreState extends State<SignUpStepGenre> {
   void _validateContinueButton() {
     if (_userGenre != "" &&
         (_switchGenreMen == true || _switchGenreWomen == true))
-      widget.activeButton({'active': true, 'gender':_userGenre});
+      widget.activeButton({'active': true, 'gender': _userGenre});
     else
       widget.activeButton({'active': false});
   }
 
   @override
   Widget build(BuildContext context) {
+    return SingleChildScrollView(
+          child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 22,vertical: 21),
+            child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Padding(padding: EdgeInsets.only(top: 40)),
+              Text("Seu gênero", style: ThemeText.sign_up_option),
+              Padding(padding: EdgeInsets.only(bottom: 20)),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+                Padding(padding: EdgeInsets.only(right: 26)),
+                _choiceGenre(genre: "woman", labelText: "Mulher", asset: ThemeAsset.woman),
+                Padding(padding: EdgeInsets.only(right: 23)),
+                 _choiceGenre(genre: "man", labelText: "Homem", asset: ThemeAsset.man),
+                
+              ]),
+              Padding(padding: EdgeInsets.only(bottom: 13)),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                Text("Outro", style: ThemeText.input_field_tip),
+              Padding(padding: EdgeInsets.only(bottom: 13)),
+              _inputOtherGenre()
+              ],)
+              
+            ]),
+      ),
+    );
+  }
+
+  Widget _choiceGenre({genre, labelText, asset}) {
     return Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: <Widget>[
-          Padding(padding: EdgeInsets.only(top: 40)),
-          Text("Você é...", style: ThemeText.sign_up_title),
-          Padding(padding: EdgeInsets.only(bottom: 13)),
-          Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
-            SizedBox(
-              width: 118,
-              height: 100,
-              child: RaisedButton(
-                onPressed: () {
-                  _choiceUserGenre("woman");
-                },
-                color: ThemeColor.white,
-                elevation: 1.0,
-                shape: RoundedRectangleBorder(
-                    side: _userGenre == "woman"
-                        ? BorderSide(color: ThemeColor.blue_violet)
-                        : BorderSide.none,
-                    borderRadius: new BorderRadius.circular(6.0)),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image.asset(
-                        ThemeAsset.woman,
-                        color: _userGenre == "woman"
-                            ? ThemeColor.blue_violet
-                            : ThemeColor.charcoal,
-                      ),
-                      Padding(padding: EdgeInsets.only(bottom: 11)),
-                      Text("Uma mulher")
-                    ]),
-              ),
+      children: [
+        SizedBox(
+          width: 120,
+          height: 120,
+          child: RaisedButton(
+            onPressed: () {
+              _choiceUserGenre(genre);
+            },
+            color: ThemeColor.black_grey,
+            elevation: 1.0,
+            shape: RoundedRectangleBorder(
+                side: _userGenre == genre
+                    ? BorderSide(color: ThemeColor.secondary_color)
+                    : BorderSide.none,
+                borderRadius: new BorderRadius.circular(120)),
+            child: Image.asset(
+              asset,
+              color: _userGenre == genre ? ThemeColor.secondary_color : Colors.white,
             ),
-            Padding(padding: EdgeInsets.only(right: 26)),
-            SizedBox(
-              width: 118,
-              height: 100,
-              child: RaisedButton(
-                onPressed: () {
-                  _choiceUserGenre("man");
-                },
-                color: ThemeColor.white,
-                elevation: 1.0,
-                shape: RoundedRectangleBorder(
-                    side: _userGenre == "man"
-                        ? BorderSide(color: ThemeColor.blue_violet)
-                        : BorderSide.none,
-                    borderRadius: new BorderRadius.circular(6.0)),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Image.asset(ThemeAsset.man,
-                          color: _userGenre == "man"
-                              ? ThemeColor.blue_violet
-                              : ThemeColor.charcoal),
-                      Padding(padding: EdgeInsets.only(bottom: 11)),
-                      Text("Um homem")
-                    ]),
-              ),
-            ),
-          ]),
-          Padding(padding: EdgeInsets.only(bottom: 13)),
-          Text("Outro", style: ThemeText.sign_up_title),
-          Padding(padding: EdgeInsets.only(bottom: 13)),
-          _inputOtherGenre()
-        ]);
+          ),
+        ),
+        Padding(padding: EdgeInsets.only(bottom: 11)),
+        Container(
+            width: 88,
+            height: 24,
+            decoration: BoxDecoration(
+                border: _userGenre == genre
+                    ? Border.all(color: ThemeColor.secondary_color)
+                    : null,
+                color: ThemeColor.black_grey,
+                borderRadius: BorderRadius.all(Radius.circular(16))),
+            child: Center(
+                child: Text(
+              labelText,
+              style: ThemeText.font_bold_12_white,
+            )))
+      ],
+    );
   }
 
   Widget _inputOtherGenre() {
     return InputFormField(
-      onChanged: (value) {},
-      width: SizeConfig.safeBlockHorizontal * 100,
-      controller: _otherGenreController
-    );
+
+        borderColor: ThemeColor.secondary_color,
+        onChanged: (value) {},
+        width: SizeConfig.safeBlockHorizontal * 100,
+        controller: _otherGenreController);
   }
 }
