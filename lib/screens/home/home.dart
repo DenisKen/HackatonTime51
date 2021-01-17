@@ -1,10 +1,9 @@
 import 'package:Discere/components/appbar_back.dart';
-import 'package:Discere/components/appbar_bottom.dart';
 import 'package:Discere/models/user.dart';
-import 'package:Discere/screens/discover.dart';
-import 'package:Discere/screens/my_classes.dart';
-import 'package:Discere/screens/search.dart';
-import 'package:Discere/screens/student_profile.dart';
+import 'package:Discere/screens/home/discover.dart';
+import 'package:Discere/screens/home/my_classes.dart';
+import 'package:Discere/screens/home/search.dart';
+import 'package:Discere/screens/home/student_profile.dart';
 import 'package:Discere/theme/style.dart';
 import 'package:flutter/material.dart';
 
@@ -46,18 +45,26 @@ class _HomeState extends State<Home> {
 
   Widget _appBarBottom(){
      return Container(
+      padding: EdgeInsets.symmetric(horizontal: 30, vertical: 5),
       height: 50,
       color: Colors.red,
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          _icon(ThemeAsset.addPlus, 'Ínicio')
+          _icon(ThemeAsset.addPlus, 'Ínicio'),
+          _icon(ThemeAsset.addPlus, 'Pesquisar'),
+          _icon(ThemeAsset.addPlus, 'Aulas'),
+          _icon(ThemeAsset.addPlus, 'Perfil')
         ],
       ),
     );
   }
   Widget _icon(String asset, String text) {
-    return Column(
-      children: [Image(image: AssetImage(asset)), Text(text)],
+    return Container(
+      child: Column(
+        children: [Image(image: AssetImage(asset)), Text(text)],
+      ),
     );
   }
 

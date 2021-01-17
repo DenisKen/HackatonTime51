@@ -1,4 +1,4 @@
-import 'package:Discere/screens/home.dart';
+import 'package:Discere/screens/home/home.dart';
 import 'package:Discere/screens/loading.dart';
 import 'package:Discere/screens/login.dart';
 import 'package:Discere/utils/enum_authStatus.dart';

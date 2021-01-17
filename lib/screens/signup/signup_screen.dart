@@ -2,7 +2,7 @@ import 'package:Discere/components/appbar_back.dart';
 import 'package:Discere/components/continue_button.dart';
 import 'package:Discere/models/signup_data.dart';
 import 'package:Discere/models/user_notifier.dart';
-import 'package:Discere/screens/home.dart';
+import 'package:Discere/screens/home/home.dart';
 import 'package:Discere/screens/signup/signup_step_birth.dart';
 import 'package:Discere/screens/signup/signup_step_email.dart';
 import 'package:Discere/screens/signup/signup_step_genre.dart';
