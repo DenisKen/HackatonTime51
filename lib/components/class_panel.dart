@@ -30,20 +30,22 @@ class ClassPanel extends StatelessWidget {
         height: 200,
         color: Colors.amber[600],
         child: Column(children: [
-          live != null ?
-          live
-              ? Align(
-                  alignment: Alignment.topLeft,
-                  child: Container(
-                      width: 60,
-                      height: 20,
-                      decoration: BoxDecoration(
-                          color: Colors.grey,
-                          borderRadius: BorderRadius.all(Radius.circular(10))),
-                      child:
-                          FittedBox(fit: BoxFit.contain, child: Text('live'))),
-                )
-              : Container() : Container(),
+          live != null
+              ? live
+                  ? Align(
+                      alignment: Alignment.topLeft,
+                      child: Container(
+                          width: 60,
+                          height: 20,
+                          decoration: BoxDecoration(
+                              color: Colors.grey,
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10))),
+                          child: FittedBox(
+                              fit: BoxFit.contain, child: Text('live'))),
+                    )
+                  : Container()
+              : Container(),
           Expanded(child: Center(child: Text('$title'))),
           Align(
             alignment: Alignment.bottomCenter,

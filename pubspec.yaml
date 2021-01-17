@@ -23,7 +23,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  
+  table_calendar: ^2.3.3
   percent_indicator: "^2.1.7+2"
   permission_handler: ^5.0.1
   agora_rtc_engine: ^3.2.1

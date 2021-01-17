@@ -1,5 +1,6 @@
 import 'package:Discere/theme/style.dart';
 import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
 
 class InputFormField extends StatefulWidget {
 
@@ -19,7 +20,7 @@ class InputFormField extends StatefulWidget {
 
   final Function(String) onChanged;
 
-  const InputFormField({Key key, this.width, this.controller, this.hintText, this.validator, this.errorValidator, this.formKey, this.textInputType, this.maxLength, this.onChanged, this.initialValue}) : super(key: key);
+  const InputFormField({Key key, @required this.width, @required this.controller, @required this.hintText, this.validator, this.errorValidator, this.formKey, this.textInputType, this.maxLength, this.onChanged, this.initialValue}) : super(key: key);
 
   @override
   _InputFormFieldState createState() => _InputFormFieldState();

@@ -1,5 +1,6 @@
 import 'package:Discere/components/class_panel.dart';
 import 'package:Discere/components/profile_button.dart';
+import 'package:Discere/screens/create_class.dart';
 import 'package:Discere/utils/size_config.dart';
 
 import 'package:flutter/material.dart';
@@ -32,7 +33,12 @@ class MentorProfile extends StatelessWidget {
                   ProfileButton(
                     title: 'Criar aula',
                     width: SizeConfig.safeBlockHorizontal * 42.5,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CreateClass()));
+                    },
                   ),
                 ],
               )
