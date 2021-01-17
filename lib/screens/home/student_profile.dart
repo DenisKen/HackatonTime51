@@ -1,3 +1,4 @@
+import 'package:Discere/components/profile_button.dart';
 import 'package:Discere/components/vocational_bar.dart';
 import 'package:Discere/utils/size_config.dart';
 import 'package:flutter/material.dart';
@@ -7,14 +8,19 @@ class StudentProfile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
-              child: SafeArea(
+        child: SafeArea(
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 22, vertical: 22),
             child: Column(children: <Widget>[
               _rowAvatar(),
               Padding(padding: EdgeInsets.only(bottom: 30)),
               _rowTrophies(),
-              _vocationColumn()
+              _vocationColumn(),
+              ProfileButton(
+                title: 'Editar perfil',
+                width: SizeConfig.safeBlockHorizontal * 100,
+                onPressed: () {},
+              ),
             ]),
           ),
         ),
@@ -79,11 +85,10 @@ class StudentProfile extends StatelessWidget {
                 ),
                 Padding(padding: EdgeInsets.only(bottom: 10)),
                 VocationalBar(
-                  title: 'Resolver problemas',
-                  width: SizeConfig.safeBlockHorizontal * 40,
-                  percent: 0.5,
-                  progressColor: Colors.greenAccent
-                ),
+                    title: 'Resolver problemas',
+                    width: SizeConfig.safeBlockHorizontal * 40,
+                    percent: 0.5,
+                    progressColor: Colors.greenAccent),
                 Padding(padding: EdgeInsets.only(bottom: 10)),
                 VocationalBar(
                   title: 'Extroversão',
@@ -116,7 +121,7 @@ class StudentProfile extends StatelessWidget {
   Widget _rowAvatar() {
     return Container(
       height: 150,
-          child: Row(
+      child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _avatarImage(),
@@ -128,7 +133,7 @@ class StudentProfile extends StatelessWidget {
               Text('Idade'),
               Text('Localização'),
               Container(
-                width: 80,
+                  width: 80,
                   decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.all(Radius.circular(10))),
@@ -170,13 +175,13 @@ class StudentProfile extends StatelessWidget {
       children: [
         Align(
           alignment: Alignment.center,
-                  child: Container(
+          child: Container(
               width: 110,
               height: 110,
               decoration: new BoxDecoration(
                 color: Colors.orange,
                 shape: BoxShape.circle,
-              )), 
+              )),
         ),
         Positioned.fill(
           top: 0,

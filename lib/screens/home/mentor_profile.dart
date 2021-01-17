@@ -1,6 +1,7 @@
 import 'package:Discere/components/class_panel.dart';
-import 'package:Discere/components/vocational_bar.dart';
+import 'package:Discere/components/profile_button.dart';
 import 'package:Discere/utils/size_config.dart';
+
 import 'package:flutter/material.dart';
 
 class MentorProfile extends StatelessWidget {
@@ -19,8 +20,21 @@ class MentorProfile extends StatelessWidget {
               _bio(),
               Padding(padding: EdgeInsets.only(bottom: 20)),
               _nextClass(),
-              Container(
-                child: Text('Editar Perfil'),
+              Padding(padding: EdgeInsets.only(bottom: 20)),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  ProfileButton(
+                    title: 'Editar perfil',
+                    width: SizeConfig.safeBlockHorizontal * 42.5,
+                    onPressed: () {},
+                  ),
+                  ProfileButton(
+                    title: 'Criar aula',
+                    width: SizeConfig.safeBlockHorizontal * 42.5,
+                    onPressed: () {},
+                  ),
+                ],
               )
             ]),
           ),
