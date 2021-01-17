@@ -116,23 +116,23 @@ class StudentProfile extends StatelessWidget {
   Widget _rowAvatar() {
     return Container(
       height: 150,
-      color: Colors.red,
           child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           _avatarImage(),
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text('Nome'),
               Text('Idade'),
               Text('Localização'),
               Container(
+                width: 80,
                   decoration: BoxDecoration(
                       color: Colors.grey,
                       borderRadius: BorderRadius.all(Radius.circular(10))),
-                  child: Text('Aluno'))
+                  child: Center(child: Text('Aluno')))
             ],
           )
         ],
@@ -169,20 +169,28 @@ class StudentProfile extends StatelessWidget {
       clipBehavior: Clip.none,
       children: [
         Align(
-          alignment: Alignment.topCenter,
+          alignment: Alignment.center,
                   child: Container(
               width: 110,
               height: 110,
-              child: Container(width: 50,height: 50,color: Colors.red,),
               decoration: new BoxDecoration(
                 color: Colors.orange,
                 shape: BoxShape.circle,
-              )),
-              
+              )), 
         ),
-
+        Positioned.fill(
+          top: 0,
+          child: Align(
+            alignment: Alignment.center,
+            child: CircleAvatar(
+              backgroundColor: Colors.brown.shade800,
+              radius: 50,
+              child: Text('AH'),
+            ),
+          ),
+        ),
         Positioned(
-          bottom: 20,
+          bottom: 0,
           right: 0,
           left: 0,
           child: Container(

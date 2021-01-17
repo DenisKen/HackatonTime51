@@ -1,6 +1,7 @@
 import 'package:Discere/components/appbar_back.dart';
 import 'package:Discere/models/user.dart';
 import 'package:Discere/screens/home/discover.dart';
+import 'package:Discere/screens/home/mentor_profile.dart';
 import 'package:Discere/screens/home/my_classes.dart';
 import 'package:Discere/screens/home/search.dart';
 import 'package:Discere/screens/home/student_profile.dart';
@@ -70,8 +71,8 @@ class _HomeState extends State<Home> {
 
   Widget _profileView() {
     if (User.instance.role == "Student")
-      return StudentProfile();
+      return MentorProfile();
     else
-      return StudentProfile();
+      return MentorProfile();
   }
 }

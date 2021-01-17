@@ -30,6 +30,7 @@ class ClassPanel extends StatelessWidget {
         height: 200,
         color: Colors.amber[600],
         child: Column(children: [
+          live != null ?
           live
               ? Align(
                   alignment: Alignment.topLeft,
@@ -42,7 +43,7 @@ class ClassPanel extends StatelessWidget {
                       child:
                           FittedBox(fit: BoxFit.contain, child: Text('live'))),
                 )
-              : Container(),
+              : Container() : Container(),
           Expanded(child: Center(child: Text('$title'))),
           Align(
             alignment: Alignment.bottomCenter,
