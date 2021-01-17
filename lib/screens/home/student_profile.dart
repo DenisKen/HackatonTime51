@@ -10,23 +10,18 @@ class StudentProfile extends StatelessWidget {
           child: Column(children: <Widget>[
             _rowAvatar(),
             Padding(padding: EdgeInsets.only(bottom: 30)),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-              Text("Troféus"),
-              Container(
-                height: 100,
-                color: Colors.black,
-                              child: ListView.separated(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.horizontal,
-                  itemCount: 5,
-                  itemBuilder: (BuildContext context, int index){
-                    return  CircleAvatar(radius: 40);
-                  },
-                  separatorBuilder: (BuildContext context, int index) => const Padding(padding: EdgeInsets.only(right: 10),),
-                ),
-              )
+            _rowTrophies(),
+            Column(children: [
+              Text('Status'),
+              Column(children: [
+                Text('Adaptação'),
+                Container(
+                  height: 30,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(50))
+                  ),
+                )
+              ],)
             ],)
           ]),
         ),
@@ -51,6 +46,30 @@ class StudentProfile extends StatelessWidget {
                     borderRadius: BorderRadius.all(Radius.circular(10))),
                 child: Text('Aluno'))
           ],
+        )
+      ],
+    );
+  }
+
+  Widget _rowTrophies() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text("Troféus"),
+        Container(
+          height: 100,
+          child: ListView.separated(
+            shrinkWrap: true,
+            scrollDirection: Axis.horizontal,
+            itemCount: 5,
+            itemBuilder: (BuildContext context, int index) {
+              return CircleAvatar(radius: 40);
+            },
+            separatorBuilder: (BuildContext context, int index) =>
+                const Padding(
+              padding: EdgeInsets.only(right: 10),
+            ),
+          ),
         )
       ],
     );
