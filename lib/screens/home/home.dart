@@ -38,7 +38,6 @@ class _HomeState extends State<Home> {
               Search(),
               MyClasses(),
               _profileView(),
-
             ],
           ),
         ));

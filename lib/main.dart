@@ -1,12 +1,13 @@
 import 'package:Discere/manager_route.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 
 import 'models/user_notifier.dart';
 
 void main() {
   //Do initial things neeeded here
-  runApp(MyApp());
+  initializeDateFormatting().then((_) => runApp(MyApp()));
 }
 
 class MyApp extends StatelessWidget {

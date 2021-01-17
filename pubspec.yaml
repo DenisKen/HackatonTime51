@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   
+  intl: ^0.16.1
   table_calendar: ^2.3.3
   percent_indicator: "^2.1.7+2"
   permission_handler: ^5.0.1
