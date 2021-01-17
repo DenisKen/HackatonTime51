@@ -1,6 +1,11 @@
-import 'package:Discere/components/class_panel.dart';
-import 'package:Discere/screens/live.dart';
-import 'package:Discere/utils/size_config.dart';
+import 'package:Discere/components/appbar_back.dart';
+import 'package:Discere/components/appbar_bottom.dart';
+import 'package:Discere/models/user.dart';
+import 'package:Discere/screens/discover.dart';
+import 'package:Discere/screens/my_classes.dart';
+import 'package:Discere/screens/search.dart';
+import 'package:Discere/screens/student_profile.dart';
+import 'package:Discere/theme/style.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -9,45 +14,57 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  static List<String> mainDataList = [
-    'League of Legends',
-    'Valorant',
-    'Call of Duty',
-    'Call of Duty Mobile',
-    'Mobile Games',
-    'Hearthstone'
-  ];
+  PageController pageController;
+  String currentScreen = "";
+
+  @override
+  void initState() {
+    super.initState();
+    pageController = new PageController(initialPage: 1);
+    currentScreen = "discover";
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: _appBarBottom(),
         backgroundColor: Colors.black,
         body: SafeArea(
-          child: Container(
-            height: SizeConfig.safeBlockVertical * 100,
-            width: SizeConfig.safeBlockHorizontal * 100,
-            child: Column(children: [
-              Text(
-                'Aulas disponivel',
-                style: TextStyle(color: Colors.white),
-              ),
-              Container(
-                child: ListView.separated(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  padding: const EdgeInsets.all(8),
-                  itemCount: 2,
-                  itemBuilder: (BuildContext context, int index) {
-                    return ClassPanel(
-                        title: 'COMO VIREI CRIADOR DE JOGOS DIGITAIS',
-                        date: '16/01',
-                        hour: '19:00');
-                  },
-                  separatorBuilder: (BuildContext context, int index) => const Divider(),
-                ),
-              )
-            ]),
+          child: PageView(
+            controller: pageController,
+            scrollDirection: Axis.horizontal,
+            children: [
+              Discover(),
+              Search(),
+              MyClasses(),
+              _profileView(),
+
+            ],
           ),
         ));
+  }
+
+  Widget _appBarBottom(){
+     return Container(
+      height: 50,
+      color: Colors.red,
+      child: Row(
+        children: [
+          _icon(ThemeAsset.addPlus, 'Ínicio')
+        ],
+      ),
+    );
+  }
+  Widget _icon(String asset, String text) {
+    return Column(
+      children: [Image(image: AssetImage(asset)), Text(text)],
+    );
+  }
+
+  Widget _profileView() {
+    if (User.instance.role == "Student")
+      return StudentProfile();
+    else
+      return StudentProfile();
   }
 }
