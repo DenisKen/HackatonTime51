@@ -142,7 +142,7 @@ abstract class ThemeEffect {
 
 abstract class ThemeAsset {
   //Logos
-
+  static const String logo = "assets/images/logo.png";
   //Images
 
   //Icons

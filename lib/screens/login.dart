@@ -36,6 +36,7 @@ class _LoginState extends State<Login> {
               children: <Widget>[
                 CircleAvatar(
                   radius: 56.5,
+                  backgroundImage: AssetImage(ThemeAsset.logo),
                   backgroundColor: Colors.grey,
                 ),
                 Padding(padding: EdgeInsets.only(bottom: 60)),
