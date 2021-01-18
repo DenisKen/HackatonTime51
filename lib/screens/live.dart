@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:Discere/models/user.dart';
+import 'package:Discere/theme/style.dart';
 import 'package:Discere/utils/settings.dart';
 import 'package:agora_rtc_engine/rtc_engine.dart';
 import 'package:agora_rtc_engine/rtc_local_view.dart' as RtcLocalView;
@@ -11,12 +12,14 @@ import 'package:permission_handler/permission_handler.dart';
 class Live extends StatefulWidget {
   /// non-modifiable channel name of the page
   final String channelName;
+  final String channelToken;
 
   /// non-modifiable client role of the page
   final ClientRole role;
 
   /// Creates a call page with given channel name.
-  const Live({Key key, this.channelName, this.role}) : super(key: key);
+  const Live({Key key, this.channelName, this.role, this.channelToken})
+      : super(key: key);
 
   @override
   _LiveState createState() => _LiveState();
@@ -70,7 +73,7 @@ class _LiveState extends State<Live> {
     VideoEncoderConfiguration configuration = VideoEncoderConfiguration();
     configuration.dimensions = VideoDimensions(1920, 1080);
     await _engine.setVideoEncoderConfiguration(configuration);
-    await _engine.joinChannel(Token, widget.channelName, null, 0);
+    await _engine.joinChannel(widget.channelToken, widget.channelName, null, 0);
   }
 
   /// Create agora sdk instance and initialize
@@ -78,9 +81,9 @@ class _LiveState extends State<Live> {
     _engine = await RtcEngine.create(APP_ID);
     await _engine.enableVideo();
     await _engine.setChannelProfile(ChannelProfile.LiveBroadcasting);
-    if(User.instance.role == "Student"){
+    if (User.instance.role == "studant") {
       await _engine.setClientRole(ClientRole.Audience);
-    }else
+    } else
       await _engine.setClientRole(ClientRole.Broadcaster);
   }
 
@@ -303,7 +306,7 @@ class _LiveState extends State<Live> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Agora Flutter QuickStart'),
+        backgroundColor: ThemeColor.background,
       ),
       backgroundColor: Colors.black,
       body: Center(

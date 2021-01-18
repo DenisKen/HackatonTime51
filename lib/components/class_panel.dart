@@ -1,7 +1,9 @@
 import 'package:Discere/screens/class_detail.dart';
+import 'package:Discere/screens/live.dart';
 import 'package:Discere/theme/style.dart';
 import 'package:Discere/utils/size_config.dart';
 import 'package:flutter/material.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class ClassPanel extends StatelessWidget {
   final String title;
@@ -12,6 +14,8 @@ class ClassPanel extends StatelessWidget {
   final String cover;
   final String mentorId;
   final String description;
+  final String channelName;
+  final String channelToken;
 
   final String id;
 
@@ -24,13 +28,23 @@ class ClassPanel extends StatelessWidget {
       this.cover,
       this.mentorId,
       this.id,
-      this.description})
+      this.description,
+      this.channelName, this.channelToken})
       : super(key: key);
-
+      
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
+      onTap: () async{
+
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Live(
+                  channelToken: channelToken,
+                      channelName: channelName,
+                    )));
+        return;
         print("Class_Panel Tapped");
         Navigator.push(
             context,
@@ -38,6 +52,8 @@ class ClassPanel extends StatelessWidget {
                 builder: (context) => ClassDetail(
                       title: title,
                       cover: cover,
+                      channelName: channelName,
+                      channelToken: channelToken,
                       date: date,
                       hour: hour,
                       description: description,
@@ -47,9 +63,9 @@ class ClassPanel extends StatelessWidget {
         height: 195,
         width: SizeConfig.safeBlockHorizontal * 100,
         decoration: BoxDecoration(
-            image: DecorationImage(
-                image: NetworkImage('$cover'), fit: BoxFit.fill),
-           ),
+          image:
+              DecorationImage(image: NetworkImage('$cover'), fit: BoxFit.fill),
+        ),
         child: Container(
           padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
           child: Column(children: [

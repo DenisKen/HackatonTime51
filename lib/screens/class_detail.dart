@@ -9,10 +9,13 @@ class ClassDetail extends StatelessWidget {
   final String hour;
   final String cover;
 
+  final String channelName;
+  final String channelToken;
+
   final String description;
 
   const ClassDetail(
-      {Key key, this.title, this.date, this.hour, this.description, this.cover})
+      {Key key, this.title, this.date, this.hour, this.description, this.cover, this.channelName, this.channelToken})
       : super(key: key);
 
   @override
@@ -28,7 +31,6 @@ class ClassDetail extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 22, vertical: 21),
               child: Column(
                 children: [
-                  
                   //_rowMentor(),
                   Padding(padding: EdgeInsets.only(bottom: 20)),
                   _details(),
@@ -47,12 +49,10 @@ class ClassDetail extends StatelessWidget {
   Widget _panelCover() {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-        
         height: 300,
         decoration: BoxDecoration(
-          image: DecorationImage(
-            
-                image: NetworkImage('$cover'), fit: BoxFit.cover),
+          image:
+              DecorationImage(image: NetworkImage('$cover'), fit: BoxFit.cover),
         ),
         child: Column(
           children: [
@@ -129,7 +129,7 @@ class ClassDetail extends StatelessWidget {
   Widget _details() {
     return Align(
       alignment: Alignment.centerLeft,
-          child: Column(
+      child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(

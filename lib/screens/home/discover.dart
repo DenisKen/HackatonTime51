@@ -31,9 +31,9 @@ class Discover extends StatelessWidget {
     return Consumer<DiscoverLivesNotifier>(builder: (context, notifier, _) {
       return notifier.lives != null
           ? Container(
+            height: SizeConfig.safeBlockVertical*80,
               child: ListView.separated(
                 scrollDirection: Axis.vertical,
-                physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
                 padding: const EdgeInsets.all(8),
                 itemCount: notifier.lives.length,
@@ -43,6 +43,8 @@ class Discover extends StatelessWidget {
                     date: DateNow.getDDMMFromDate(notifier.lives[index].date),
                     hour: DateNow.getHHMMFromDate(notifier.lives[index].date),
                     cover: notifier.lives[index].cover,
+                    channelName: notifier.lives[index].channelName,
+                    channelToken: notifier.lives[index].channelToken,
                     description: notifier.lives[index].description,
                     id: notifier.lives[index].id,
                     live: true,

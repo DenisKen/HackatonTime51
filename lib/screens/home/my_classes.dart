@@ -28,7 +28,7 @@ class MyClasses extends StatelessWidget {
         scrollDirection: Axis.vertical,
         shrinkWrap: true,
         padding: const EdgeInsets.all(8),
-        itemCount: 2,
+        itemCount: 0,
         itemBuilder: (BuildContext context, int index) {
           return ClassPanel(
             title: 'COMO VIREI CRIADOR DE JOGOS DIGITAIS',
