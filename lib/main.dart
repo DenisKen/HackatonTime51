@@ -1,4 +1,5 @@
 import 'package:Discere/manager_route.dart';
+import 'package:Discere/models/discover_lives_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
@@ -18,6 +19,9 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider<UserNotifier>(
           create: (_) => UserNotifier(),
+        ),
+        ChangeNotifierProvider<DiscoverLivesNotifier>(
+          create: (_) => DiscoverLivesNotifier(),
         )
       ],
       child: MaterialApp(

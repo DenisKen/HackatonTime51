@@ -2,6 +2,7 @@ import 'package:Discere/components/profile_button.dart';
 import 'package:Discere/components/profile_view/profile_view_basic_info.dart';
 import 'package:Discere/components/profile_view/profile_view_trophies.dart';
 import 'package:Discere/components/vocational_bar.dart';
+import 'package:Discere/models/user.dart';
 import 'package:Discere/theme/style.dart';
 import 'package:Discere/utils/size_config.dart';
 import 'package:flutter/material.dart';
@@ -16,16 +17,18 @@ class StudentProfile extends StatelessWidget {
           child: Container(
             padding: EdgeInsets.symmetric(horizontal: 22, vertical: 22),
             child: Column(children: <Widget>[
-              ProfileViewBasicInfo(name: "Denis Ken",age: "23",location: "--",role: "Aluno",),
+              ProfileViewBasicInfo(name: User.instance.name ,age: "--",location: "--",role: "Aluno"),
               Padding(padding: EdgeInsets.only(bottom: 30)),
               ProfileViewTrophies(),
               _vocationColumn(),
               Padding(padding: EdgeInsets.only(bottom: 30)),
+              /*
               ProfileButton(
                 title: 'Editar perfil',
                 width: SizeConfig.safeBlockHorizontal * 100,
                 onPressed: () {},
               ),
+              */
             ]),
           ),
         ),

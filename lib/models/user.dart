@@ -5,9 +5,11 @@ class User {
   String token;
 
   String name;
-  String picURL;
-
+  String gender;
   String role;
+
+  String email;
+
 
   factory User({id, token, name}) {
     _instance.id = id;
@@ -18,18 +20,20 @@ class User {
   }
 
   factory User.fromJson(Map<String, dynamic> json) {
-    //_instance.id = json['user']['id'];
-    _tempUserTest();
+    if (json['user']['user']['gender'] != null)
+    _instance.gender = json['user']['user']['gender'];
+    if (json['user']['user']['role'] != null)
+    _instance.role = json['user']['user']['role'];
+    if (json['user']['user']['name'] != null)
+    _instance.name = json['user']['user']['name'];
+    if (json['user']['user']['email'] != null)
+    _instance.email = json['user']['user']['email'];
+    if (json['user']['user']['id'] != null)
+    _instance.id = json['user']['user']['id'];
+    if (json['user']['token'] != null)
+    _instance.token = json['user']['token'];
 
     return _instance;
-  }
-
-  static _tempUserTest() {
-    _instance.id = "001";
-    _instance.token = "a123e";
-    _instance.name = "Denis Ken";
-    _instance.picURL =
-        "https://scontent-gru1-1.xx.fbcdn.net/v/t1.0-9/50335311_2024197577645281_3658935961481379840_o.jpg?_nc_cat=106&ccb=2&_nc_sid=09cbfe&_nc_eui2=AeH7m4WKfX84oiyxnFlwxB8YUcC1umpqAdlRwLW6amoB2Q2hbmQRVD1mWiuL1Z1ti6XCQBRYnzTgMmZ4CMQjqoiT&_nc_ohc=-n4wDPUWli8AX9CZ57q&_nc_ht=scontent-gru1-1.xx&oh=26d316d640e118b20c4b99da0dd50f48&oe=60270A75";
   }
 
   static User get instance => _instance;

@@ -1,27 +1,46 @@
+import 'dart:convert';
+
 import 'package:Discere/models/user.dart';
+import 'package:Discere/services/server_service.dart';
 import 'package:Discere/utils/enum_authStatus.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class UserNotifier extends ChangeNotifier {
   AuthStatus authStatus = AuthStatus.none;
 
-  Future<AuthStatus> auth(email, pass) async {
+  Future<void> login(data) async {
     _updateAuthStatus(AuthStatus.authenticating);
     //Try to authenticate with our server
-    if (email != "teste" && pass != "teste"){
-        authStatus = AuthStatus.unauthenticated;
-        return authStatus;
+    var response = await ServerService.instance.login(data);
+    print(response.statusCode);
+    print(response.body.toString());
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
+      _updateAuthStatus(AuthStatus.authenticated);
+      return;
     }
-    //
-    await _initUser(null, 'token1231');
-
-    return authStatus;
+    _updateAuthStatus(AuthStatus.unauthenticated);
+    return;
   }
 
-  Future<void> _initUser(json, token) async {
-    //User.fromJson(json);
+  Future<void> createUser(data) async {
+    _updateAuthStatus(AuthStatus.authenticating);
+    //Try to createUser with our server
+    var response = await ServerService.instance.createUser(data);
+    print(response.body);
+    if (response.statusCode >= 200 && response.statusCode <= 299) {
+      _initUser(jsonDecode(response.body));
+
+      _updateAuthStatus(AuthStatus.authenticated);
+      return;
+    }
+    _updateAuthStatus(AuthStatus.unauthenticated);
+    return;
+  }
+
+  Future<void> _initUser(json) async {
+    User.fromJson(json);
     _updateAuthStatus(AuthStatus.authenticated);
+    
   }
 
   void _updateAuthStatus(AuthStatus newValue) {

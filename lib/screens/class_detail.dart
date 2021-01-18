@@ -7,15 +7,18 @@ class ClassDetail extends StatelessWidget {
   final String title;
   final String date;
   final String hour;
+  final String cover;
 
-  const ClassDetail({Key key, this.title, this.date, this.hour})
+  final String description;
+
+  const ClassDetail(
+      {Key key, this.title, this.date, this.hour, this.description, this.cover})
       : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ThemeColor.background,
-      appBar: AppBarBack(),
       body: Stack(children: [
         SingleChildScrollView(
           child: Container(
@@ -25,7 +28,8 @@ class ClassDetail extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 22, vertical: 21),
               child: Column(
                 children: [
-                  _rowMentor(),
+                  
+                  //_rowMentor(),
                   Padding(padding: EdgeInsets.only(bottom: 20)),
                   _details(),
                   Padding(padding: EdgeInsets.only(bottom: 20)),
@@ -43,16 +47,35 @@ class ClassDetail extends StatelessWidget {
   Widget _panelCover() {
     return Container(
         padding: EdgeInsets.symmetric(horizontal: 15, vertical: 15),
-        color: ThemeColor.background,
-        height: 200,
+        
+        height: 300,
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            
+                image: NetworkImage('$cover'), fit: BoxFit.cover),
+        ),
         child: Column(
           children: [
-            Expanded(child: Center(child: Text('$title',style: ThemeText.font_bold_24_secondary_color,))),
+            Expanded(
+                child: Center(
+                    child: Text(
+              '$title',
+              style: ThemeText.font_bold_24_secondary_color,
+            ))),
             Align(
               alignment: Alignment.bottomCenter,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [Text('$date',style: ThemeText.font_bold_15_secondary_color,), Text('$hour',style: ThemeText.font_bold_15_secondary_color,)],
+                children: [
+                  Text(
+                    '$date',
+                    style: ThemeText.font_bold_15_secondary_color,
+                  ),
+                  Text(
+                    '$hour',
+                    style: ThemeText.font_bold_15_secondary_color,
+                  )
+                ],
               ),
             )
           ],
@@ -72,7 +95,10 @@ class ClassDetail extends StatelessWidget {
             Padding(
               padding: EdgeInsets.only(right: 10),
             ),
-            Text('Nome',style: ThemeText.font_bold_15_white,),
+            Text(
+              'Nome',
+              style: ThemeText.font_bold_15_white,
+            ),
           ],
         ),
         Container(
@@ -81,25 +107,42 @@ class ClassDetail extends StatelessWidget {
           decoration: BoxDecoration(
               color: ThemeColor.secondary_color,
               borderRadius: BorderRadius.all(Radius.circular(10))),
-          child: Center(child: Column(
+          child: Center(
+              child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-            Text('20',style: ThemeText.font_bold_24_white,),
-            Text('Vagas',style: ThemeText.font_bold_15_white,),
-          ],) ),
+              Text(
+                '20',
+                style: ThemeText.font_bold_24_white,
+              ),
+              Text(
+                'Vagas',
+                style: ThemeText.font_bold_15_white,
+              ),
+            ],
+          )),
         )
       ],
     );
   }
 
   Widget _details() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text('Descrição',style: ThemeText.font_bold_24_white,),
-        Padding(padding: EdgeInsets.only(bottom: 10)),
-        Text('Lorem asidja sdjioa jiojdoi ajdoiasj oiajdojao jaodj aodjaid', style: ThemeText.font_normal_15_white,)
-      ],
+    return Align(
+      alignment: Alignment.centerLeft,
+          child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Descrição',
+            style: ThemeText.font_bold_24_white,
+          ),
+          Padding(padding: EdgeInsets.only(bottom: 10)),
+          Text(
+            '$description',
+            style: ThemeText.font_normal_15_white,
+          )
+        ],
+      ),
     );
   }
 
@@ -128,7 +171,11 @@ class ClassDetail extends StatelessWidget {
         height: 50,
         width: SizeConfig.safeBlockHorizontal * 100,
         color: ThemeColor.primary_color,
-        child: Center(child: Text('Registrar', style: ThemeText.font_bold_15_white,)),
+        child: Center(
+            child: Text(
+          'Registrar',
+          style: ThemeText.font_bold_15_white,
+        )),
       ),
     );
   }

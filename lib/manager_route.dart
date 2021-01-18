@@ -33,7 +33,7 @@ class _ManagerRouteState extends State<ManagerRoute> {
         case AuthStatus.authenticated:
           return Home();
         case AuthStatus.unauthenticated:
-          return Home();
+          return Login();
         default:
           return LoadingScreen();
       }
@@ -43,6 +43,6 @@ class _ManagerRouteState extends State<ManagerRoute> {
   Future<void> _checkLocalAuth() async {
     print("Checking Local Auth >>>>>>>>>>>>>>>>>>>>>> MANAGER_ROUTE");
 
-    await Provider.of<UserNotifier>(context, listen: false).auth("","");
+    await Provider.of<UserNotifier>(context, listen: false).login("");
   }
 }

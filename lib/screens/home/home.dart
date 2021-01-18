@@ -1,4 +1,5 @@
 import 'package:Discere/components/appbar_back.dart';
+import 'package:Discere/models/discover_lives_notifier.dart';
 import 'package:Discere/models/user.dart';
 import 'package:Discere/screens/home/discover.dart';
 import 'package:Discere/screens/home/mentor_profile.dart';
@@ -7,6 +8,7 @@ import 'package:Discere/screens/home/search.dart';
 import 'package:Discere/screens/home/student_profile.dart';
 import 'package:Discere/theme/style.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -28,6 +30,17 @@ class _HomeState extends State<Home> {
     currentScreen = "discover";
 
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    _getInitialInfosFromServer();
+    
+    super.didChangeDependencies();
+  }
+
+  void _getInitialInfosFromServer() async {
+    await Provider.of<DiscoverLivesNotifier>(context, listen: false).update();
   }
 
   void _onPageChange(index) {
@@ -96,7 +109,8 @@ class _HomeState extends State<Home> {
           ),
           Text(
             text,
-            style: TextStyle(color: selected ? ThemeColor.primary_color : Colors.white),
+            style: TextStyle(
+                color: selected ? ThemeColor.primary_color : Colors.white),
           )
         ],
       ),
@@ -104,8 +118,8 @@ class _HomeState extends State<Home> {
   }
 
   Widget _profileView() {
-    if (User.instance.role == "Student")
-      return MentorProfile();
+    if (User.instance.role == "student")
+      return StudentProfile();
     else
       return MentorProfile();
   }

@@ -9,11 +9,34 @@ class ServerService {
     return _instance;
   }
 
-  Future<void> checkEmail(email) async{
+  Future<http.Response> checkEmail(data) async{
     //Check-Email
+    print("Authenticating with server: auth(email) >>>>>>>>>>>>>>>>>>>>>>");
+    return http.post('https://discere-api.herokuapp.com/login/check',
+    headers: <String, String>{
+          'Content-Type': 'application/json'}, 
+       body: data);
+  }
+  Future<http.Response> createUser(data) async{
+    //Create-User
+    print("Authenticating with server: createUser(data) >>>>>>>>>>>>>>>>>>>>>>");
+    return http.post('https://discere-api.herokuapp.com/users',
+       headers: <String, String>{
+          'Content-Type': 'application/json'},       
+       body: data);
+  }
+  Future<http.Response> login(data) async{
+    //Create-User
+    print("Authenticating with server: login(data) >>>>>>>>>>>>>>>>>>>>>>");
+    return http.post('https://discere-api.herokuapp.com/login',
+       headers: <String, String>{
+          'Content-Type': 'application/json'},       
+       body: data);
   }
 
-  Future<void> auth(email,pass) async{
-    //Login
+  Future<http.Response> getLives() async{
+    //GetLives
+    print("Server: getLives(data) >>>>>>>>>>>>>>>>>>>>>>");
+    return http.get('https://discere-api.herokuapp.com/lives');
   }
 }

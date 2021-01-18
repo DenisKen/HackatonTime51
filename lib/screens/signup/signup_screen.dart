@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:Discere/components/appbar_back.dart';
 import 'package:Discere/components/continue_button.dart';
 import 'package:Discere/models/signup_data.dart';
@@ -180,23 +182,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   case "genre":
                     nextPage();
                     setState(() {
-                        color = ThemeColor.primary_color;
-                        colorDisabled = ThemeColor.button_disabled_primary;
-                      });
+                      color = ThemeColor.primary_color;
+                      colorDisabled = ThemeColor.button_disabled_primary;
+                    });
                     break;
                   case "typeUser":
-                    print(data.email);
-                    print(data.pass);
-                    print(data.name);
-                    print(data.socialName);
-                    print(data.birthday);
-                    print(data.genre);
-                    print(data.userType);
-
-                    await Provider.of<UserNotifier>(context, listen: false)
-                        .auth("teste", "teste");
+                    var json = {
+                      'name': data.name,
+                      'email': data.email,
+                      'password': data.pass,
+                      'role': data.userType
+                    };
+                    print(jsonEncode(json));
 
                     Navigator.pop(context);
+
+                    await Provider.of<UserNotifier>(context, listen: false)
+                        .createUser(jsonEncode(json));
+
+                    
                     /*
                     Navigator.of(context).pushAndRemoveUntil(
                       MaterialPageRoute(

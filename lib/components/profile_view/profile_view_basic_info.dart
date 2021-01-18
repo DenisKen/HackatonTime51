@@ -29,8 +29,10 @@ class ProfileViewBasicInfo extends StatelessWidget {
                 '$name',
                 style: ThemeText.font_bold_15_white,
               ),
+              /*
               Text('$age', style: ThemeText.font_bold_15_white),
               Text('$location', style: ThemeText.font_bold_15_white),
+              */
               Container(
                   width: 130,
                   decoration: BoxDecoration(
@@ -65,7 +67,9 @@ class ProfileViewBasicInfo extends StatelessWidget {
           child: Align(
             alignment: Alignment.center,
             child: CircleAvatar(
-              backgroundColor: Colors.grey,
+              backgroundColor: ThemeColor.background,
+              
+              backgroundImage: AssetImage(ThemeAsset.man),
               radius: 50
             ),
           ),

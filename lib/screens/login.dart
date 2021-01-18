@@ -1,9 +1,14 @@
+import 'dart:convert';
+
 import 'package:Discere/components/input_fields.dart';
+import 'package:Discere/models/user_notifier.dart';
 import 'package:Discere/screens/signup/signup_screen.dart';
+import 'package:Discere/services/server_service.dart';
 import 'package:Discere/theme/style.dart';
 import 'package:Discere/utils/size_config.dart';
 import 'package:Discere/utils/validator.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class Login extends StatefulWidget {
   @override
@@ -13,8 +18,10 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
   final _emailController = TextEditingController();
+  final _passController = TextEditingController();
 
   bool buttonEnable = false;
+  bool showInputPass = false;
 
   @override
   Widget build(BuildContext context) {
@@ -45,30 +52,59 @@ class _LoginState extends State<Login> {
 
   Widget _inputField() {
     return Form(
-      key: formKey,
-      child: InputFormField(
-        //Active Button when Inputfield Isnt Empty
-        onChanged: (value) {
-          value.isEmpty
-              ? setState(() {
-                  buttonEnable = false;
-                })
-              : setState(() {
-                  buttonEnable = true;
-                });
-        },
-        controller: _emailController,
-        width: SizeConfig.safeBlockHorizontal * 100,
-        iconData: Icons.email_outlined,
-        borderColor: ThemeColor.primary_color,
-        validator: (String value) {
-          if (!Validator.email(value)) {
-            return "";
-          }
-          return null;
-        },
-      ),
-    );
+        key: formKey,
+        child: Column(
+          children: [
+            InputFormField(
+              //Active Button when Inputfield Isnt Empty
+              onChanged: (value) {
+                value.isEmpty
+                    ? setState(() {
+                        buttonEnable = false;
+                      })
+                    : setState(() {
+                        buttonEnable = true;
+                      });
+              },
+              controller: _emailController,
+              width: SizeConfig.safeBlockHorizontal * 100,
+              iconData: Icons.email_outlined,
+              borderColor: ThemeColor.primary_color,
+              validator: (String value) {
+                if (!Validator.email(value)) {
+                  return "";
+                }
+                return null;
+              },
+            ),
+            Visibility(
+              visible: showInputPass,
+              child: InputFormField(
+                //Active Button when Inputfield Isnt Empty
+                onChanged: (value) {
+                  value.isEmpty
+                      ? setState(() {
+                          buttonEnable = false;
+                        })
+                      : setState(() {
+                          buttonEnable = true;
+                        });
+                },
+                controller: _passController,
+                width: SizeConfig.safeBlockHorizontal * 100,
+                iconData: Icons.lock_outline,
+                borderColor: ThemeColor.primary_color,
+                validator: (value) {
+                  if (value.isEmpty) {
+                    print("name false");
+                    return "";
+                  }
+                  return null;
+                },
+              ),
+            ),
+          ],
+        ));
   }
 
   Widget _buttonLogIn() {
@@ -79,6 +115,35 @@ class _LoginState extends State<Login> {
         onPressed: buttonEnable
             ? () async {
                 if (this.formKey.currentState.validate()) {
+                  if (showInputPass) {
+                    await Provider.of<UserNotifier>(context, listen: false)
+                        .login("");
+                    return;
+                  }
+
+                  var data = {'email': _emailController.text};
+                  var response =
+                      await ServerService.instance.checkEmail(jsonEncode(data));
+
+                  print(response.body);
+                  print(response.statusCode);
+                  
+                  if (jsonDecode(response.body)['hasUser'] != null) {
+                    if (jsonDecode(response.body)['hasUser'] == true) {
+                      setState(() {
+                        showInputPass = true;
+                      });
+                      return;
+                    } else {
+                      setState(() {
+                        showInputPass = false;
+                      });
+                    }
+                  }
+                 
+
+                  if (response.statusCode != 200) return;
+
                   Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -91,9 +156,11 @@ class _LoginState extends State<Login> {
             : null,
         color: ThemeColor.primary_color,
         disabledColor: ThemeColor.button_disabled_primary,
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(3)),
-        child: Text('Login', style: ThemeText.font_bold_15_white,),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(3)),
+        child: Text(
+          'Login',
+          style: ThemeText.font_bold_15_white,
+        ),
       ),
     );
   }
